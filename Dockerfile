@@ -21,4 +21,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start the MCP server
-CMD [ "node", "build/index.js" ]
+CMD [ "npm", "run", "start:sse" ]

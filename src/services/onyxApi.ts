@@ -190,7 +190,7 @@ export class OnyxApiService {
    * @returns The chat response
    */
   async sendChatMessage(sessionId: string, query: string, documentSets: string[] = []): Promise<{ answer: string, documents: OnyxDocument[] }> {
-    const sendMessageUrl = `${this.config.apiUrl}/chat/send-message`;
+    const sendMessageUrl = `${this.config.apiUrl}/chat/send-chat-message`;
     console.error(`Sending message to: ${sendMessageUrl}`);
     console.error(`With chat_session_id: ${sessionId}`);
     
@@ -211,7 +211,8 @@ export class OnyxApiService {
           tags: null
         }
       },
-      regenerate: false
+      regenerate: false,
+      stream: false
     };
     
     if (DEBUG) {

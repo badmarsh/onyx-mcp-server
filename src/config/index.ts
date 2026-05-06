@@ -10,11 +10,11 @@ import { OnyxConfig } from '../types/index.js';
 export function loadConfig(): OnyxConfig {
   const config: OnyxConfig = {
     apiUrl: process.env.ONYX_API_URL || 'http://localhost:8080/api',
-    apiToken: process.env.ONYX_API_TOKEN || '',
+    apiToken: process.env.ONYX_API_TOKEN || process.env.ONYX_API_KEY || '',
   };
 
   if (!config.apiToken) {
-    console.error('ONYX_API_TOKEN environment variable is required');
+    console.error('ONYX_API_TOKEN or ONYX_API_KEY environment variable is required');
   }
 
   return config;

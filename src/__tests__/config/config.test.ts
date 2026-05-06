@@ -10,6 +10,7 @@ beforeEach(() => {
   // Reset environment variables before each test
   process.env = { ...originalEnv };
   delete process.env.ONYX_API_TOKEN;
+  delete process.env.ONYX_API_KEY;
   delete process.env.ONYX_API_URL;
   delete process.env.DEBUG;
 });
@@ -37,6 +38,16 @@ describe('Config Module', () => {
       expect(config).toEqual({
         apiUrl: 'http://test-url.com/api',
         apiToken: 'test-token',
+      });
+    });
+
+    it('should use ONYX_API_KEY when ONYX_API_TOKEN is not set', () => {
+      process.env.ONYX_API_KEY = 'fallback-token';
+
+      const config = loadConfig();
+      expect(config).toEqual({
+        apiUrl: 'http://localhost:8080/api',
+        apiToken: 'fallback-token',
       });
     });
   });
